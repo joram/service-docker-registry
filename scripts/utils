@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# COLORS
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+ORANGE='\e[38;05;214m'
+NC='\033[0m' # No Color - needed to terminate the use of a color
+
+# PRETTY PRINT FUNCTIONS
+
+function print_message () {
+  printf "${CYAN}==>${NC} $1\n"
+}
+
+function print_header () {
+  printf "${ORANGE}##############################${NC}\n"
+  printf "${ORANGE}>${NC} $1 ${ORANGE}<${NC}\n"
+  printf "${ORANGE}##############################${NC}\n\n"
+}
+
+function print_footer () {
+  printf "${BLUE}==============================${NC}\n"
+  printf "$1\n\n"
+}
+
+function print_success () {
+  printf "${GREEN}[✅ SUCCESS] $1${NC}\n\n"
+}
+
+function print_warning () {
+  printf "${YELLOW}[⚠ WARNING] $1${NC}\n\n"
+}
+
+function print_error () {
+  printf "${RED}[❌ ERROR] $1${NC}\n\n"
+}
+
+
+# GIT FUNCTIONS
+
+function git_remote_exists () {
+    remote_name=$1
+    remote_path=$2
+    num_remotes=`git remote -v | grep $remote_name | wc -l`
+    if test $num_remotes = 0; then
+        print_success "Creating git remote $remote_name"
+        git remote add $remote_name $remote_path
+    fi
+}

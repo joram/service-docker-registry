@@ -1,0 +1,7 @@
+#!/bin/bash
+#? Start Docker service containers
+
+source scripts/utils
+
+print_header "Starting services..."
+docker-compose -f scripts/services/compose.yml -p registry-web up -d --build

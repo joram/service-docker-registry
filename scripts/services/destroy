@@ -1,0 +1,5 @@
+#!/bin/bash
+#? Destroy Docker service containers
+
+docker-compose -f scripts/services/compose.yml -p registry-srv down
+docker-compose -f scripts/services/compose.yml -p registry-web down
